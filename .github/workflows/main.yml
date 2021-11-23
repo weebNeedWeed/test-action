@@ -18,6 +18,13 @@ jobs:
       - run: npm install
       - run: npm run build
       
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH }}
+          name: id_rsa
+          known_hosts: ${{ secrets.KH }}
+      
       - name: deploy
         run: |
           cd ./dist/QuizNG-frontend
